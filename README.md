@@ -4,7 +4,7 @@
 
 ### Introduction
 
-Project in java that aims to automate the change of RP in a store and to introduce the articles in a matrix provided for each supplier
+Project in java that aims to automate the change of RP in a store [Arma-SA](https://www.arma-sa.com/) and to introduce the articles in a matrix provided for each supplier
 
 ### Feature
 
