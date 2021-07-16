@@ -51,6 +51,8 @@ public class App extends JFrame {
     private JCheckBox TVACodeMatricesCheckBox;
     private JCheckBox PolitiqueTarifMatricesCheckBox;
     private JCheckBox recyclageHTVMatricesCheckBox;
+    private JCheckBox IntrastatMatricesCheckBox;
+    private JCheckBox EANMatricesCheckBox;
     private JLabel test;
     private JList list1;
 
@@ -148,7 +150,7 @@ public class App extends JFrame {
 
                 Thread threadcreate = new Thread(() ->{
                     try{
-                        FileWriter myWriter = new FileWriter(path + "\\famillerror.txt");
+                        FileWriter FamilleError = new FileWriter(path + "\\famillerror.txt");
 
                         for(int i=0; i<contents.length; i++) {
                             CreateProgressBarLabel.setText(i + 1  + "/" + contents.length +" fait");
@@ -168,14 +170,14 @@ public class App extends JFrame {
 
                             try {
                                 for (int w = 0; w < erreurfamille.size(); w++) {
-                                    myWriter.write("Erreur " + w + " : " + erreurfamille.get(w) + "\n");
+                                    FamilleError.write("Erreur " + w + " : " + erreurfamille.get(w) + "\n");
                                 }
 
                             }catch (IOException error){
                                 JOptionPane.showMessageDialog(null, error);
                             }
                         }
-                        myWriter.close();
+                        FamilleError.close();
                     }catch (Exception ex){
                         JOptionPane.showMessageDialog(null, ex);
                     }
@@ -200,6 +202,8 @@ public class App extends JFrame {
 
                     Thread threadedit = new Thread(() ->{
                        try{
+                           FileWriter GlobalError = new FileWriter(FieldCopieMatricesEdit.getText() + "\\GlobalError.txt");
+
                            for(int i=0; i<contents.length; i++) {
                                EditProgressBarLabel.setText(i + 1 + "/" + contents.length + " fait");
                                double a = i + 1;
@@ -207,7 +211,7 @@ public class App extends JFrame {
                                double pourcent = (a / b) * 100;
                                EditProgressBar.setValue((int) pourcent);
 
-                               modification mod = new modification(FieldMatricesEdit.getText() + "\\" + contents[i] + "\\" + contents[i] + ".xlsx", contents[i], FieldCopieMatricesEdit.getText());
+                               modification mod = new modification(FieldMatricesEdit.getText() + "\\" + contents[i], contents[i], FieldCopieMatricesEdit.getText());
 
                                if(DateMatricesCheckBox.isSelected()){
                                    mod.setBdate(true);
@@ -224,8 +228,27 @@ public class App extends JFrame {
                                if(recyclageHTVMatricesCheckBox.isSelected()){
                                    mod.setBRecyclageHTV(true);
                                }
+                               if(IntrastatMatricesCheckBox.isSelected()){
+                                   mod.setBmoveIntrastat(true);
+                               }
+                               if(EANMatricesCheckBox.isSelected()){
+                                   mod.setBcleanEAN(true);
+                               }
+
+                               try {
+                                   ArrayList<String> globalerror = mod.getError();
+                                   for (int w = 0; w < globalerror.size(); w++) {
+                                       GlobalError.write("Erreur " + w + " : " + globalerror.get(w) + "\n");
+                                   }
+
+                               }catch (IOException error){
+                                   JOptionPane.showMessageDialog(null, error);
+                               }
+
                                mod.modifmoicastp();
+
                            }
+                           GlobalError.close();
                        }
                        catch (Exception ex){
                     JOptionPane.showMessageDialog(null, ex);

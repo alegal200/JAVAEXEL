@@ -462,7 +462,7 @@
                     </properties>
                     <border type="none"/>
                     <children>
-                      <grid id="49bde" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                      <grid id="49bde" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                         <margin top="0" left="0" bottom="0" right="0"/>
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
@@ -474,7 +474,7 @@
                         <children>
                           <component id="1b7f0" class="javax.swing.JCheckBox" binding="DateMatricesCheckBox">
                             <constraints>
-                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                              <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
                               <text value="Date"/>
@@ -482,7 +482,7 @@
                           </component>
                           <component id="f4ec9" class="javax.swing.JCheckBox" binding="FournisseurMatricesCheckBox">
                             <constraints>
-                              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                              <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
                               <text value="Fournisseur"/>
@@ -490,7 +490,7 @@
                           </component>
                           <component id="67d8e" class="javax.swing.JCheckBox" binding="TVACodeMatricesCheckBox">
                             <constraints>
-                              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                              <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
                               <text value="TVA Code"/>
@@ -498,7 +498,7 @@
                           </component>
                           <component id="2b3f9" class="javax.swing.JCheckBox" binding="PolitiqueTarifMatricesCheckBox">
                             <constraints>
-                              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                              <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
                               <text value="Politique Tarif"/>
@@ -510,6 +510,22 @@
                             </constraints>
                             <properties>
                               <text value="RecyclageHTV"/>
+                            </properties>
+                          </component>
+                          <component id="2f081" class="javax.swing.JCheckBox" binding="IntrastatMatricesCheckBox">
+                            <constraints>
+                              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <text value="Intrastart"/>
+                            </properties>
+                          </component>
+                          <component id="5e19b" class="javax.swing.JCheckBox" binding="EANMatricesCheckBox">
+                            <constraints>
+                              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <text value="EAN"/>
                             </properties>
                           </component>
                         </children>

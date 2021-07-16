@@ -1,6 +1,5 @@
 package be.arma;
 
-import com.sun.jdi.event.ExceptionEvent;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -66,7 +65,6 @@ public class modification {
     public void setBcleanEAN(boolean b ){
         BcleanEAN=  b ;
     }
-    public ArrayList getErrorList(){return  ErreurList ;  }
 
 
 
@@ -259,6 +257,10 @@ public class modification {
         c.setCellValue(s);
 
 
+    }
+
+    public ArrayList<String> getError() {
+        return ErreurList;
     }
 
 
