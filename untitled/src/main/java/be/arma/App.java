@@ -88,6 +88,7 @@ public class App extends JFrame {
                     ioException.printStackTrace();
                 }
                 fam.info(ex.getFamList(), Fournisseur);
+
                 ArrayList<String> erreurfamille = fam.getErreurList();
                 try {
                     for (int w = 0; w < erreurfamille.size(); w++) {
