@@ -235,6 +235,10 @@ public class App extends JFrame {
                                    mod.setBcleanEAN(true);
                                }
 
+
+
+                               mod.modifmoicastp();
+
                                try {
                                    ArrayList<String> globalerror = mod.getError();
                                    for (int w = 0; w < globalerror.size(); w++) {
@@ -245,7 +249,7 @@ public class App extends JFrame {
                                    JOptionPane.showMessageDialog(null, error);
                                }
 
-                               mod.modifmoicastp();
+
 
                            }
                            GlobalError.close();

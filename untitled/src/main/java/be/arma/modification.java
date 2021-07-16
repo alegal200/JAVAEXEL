@@ -65,7 +65,9 @@ public class modification {
     public void setBcleanEAN(boolean b ){
         BcleanEAN=  b ;
     }
-
+    public ArrayList<String> getError() {
+        return ErreurList;
+    }
 
 
 
@@ -168,22 +170,46 @@ public class modification {
 
                 }
 
-                if ( BcleanEAN ){
-                    Cell ced3e = sheeteArticle.getRow(i).getCell(56) ;
-                    if(    ced3e != null       ){
-                       String tmp =  ced3e.getStringCellValue() ;
-                       if( tmp.equals("") == false ){
-                           try{
-                               int t ;
-                               t = Integer.parseInt(tmp) ;
-                               if(tmp.length() != 13 )
-                               ErreurList.add("code bare erreur : "+NomFourn+" ln : " +i +" ref : "+sheeteArticle.getRow(i).getCell(0).getStringCellValue() ) ;
-                           }catch (Exception e ){
-                               ErreurList.add("code bare erreur : "+NomFourn+" ln : " +i +" ref : "+sheeteArticle.getRow(i).getCell(0).getStringCellValue() ) ;
-                           }
+                if ( BcleanEAN ) {
+                    if (sheeteArticle.getRow(i) != null){
+                        Cell ced3e = sheeteArticle.getRow(i).getCell(56);
+                    if (ced3e != null) {
+                        String tmp = ced3e.getStringCellValue();
+                         if (tmp.equals("") == false) {
+                            try {
 
-                       }
+                               double d ;
+                                d = Double.parseDouble(tmp);
+
+                                if (tmp.length() != 13  && tmp.length() != 8 ){
+                                    if( tmp.length() < 8 ){
+                                        if(tmp.length()==1)
+                                            ErreurList.add("code bare erreur nbr    ; " + NomFourn + "    ; ln " + i + " ref ;  "+  sheeteArticle.getRow(i).getCell(0).getStringCellValue() + "   ;   code article  ; "+sheeteArticle.getRow(i).getCell(2).getStringCellValue() +"  ;   ean   ; "+ sheeteArticle.getRow(i).getCell(56).getStringCellValue());
+
+                                        while (tmp.length() != 8 )
+                                            tmp = "0"+tmp;
+
+                                        pastval(sheeteArticle , i ,56 ,tmp );
+                                    }else{
+                                        if(tmp.length() < 13 ){
+                                            while (tmp.length()!= 13 )
+                                                tmp = "0"+tmp ;
+
+                                            pastval(sheeteArticle , i ,56 ,tmp );
+                                        }else
+                                            ErreurList.add("code bare erreur nbr    ; " + NomFourn + "    ; ln " + i + " ref ;  "+  sheeteArticle.getRow(i).getCell(0).getStringCellValue() + "   ;   code article  ; "+sheeteArticle.getRow(i).getCell(2).getStringCellValue() +"  ;   ean   ; "+ sheeteArticle.getRow(i).getCell(56).getStringCellValue());
+
+                                    }
+
+                                }
+                           } catch (Exception e) {
+                                ErreurList.add("code bare erreur nbr    ; " + NomFourn + "    ; ln " + i + " ref ;  "+  sheeteArticle.getRow(i).getCell(0).getStringCellValue() + "   ;   code article  ; "+sheeteArticle.getRow(i).getCell(2).getStringCellValue() +"  ;   ean   ; "+ sheeteArticle.getRow(i).getCell(56).getStringCellValue());
+                            }
+
+                        }
+
                     }
+                }
 
                 }
 
@@ -231,9 +257,11 @@ public class modification {
         }
 
         // vider la derniere colone
-        if(BcleanEAN){
+        if(BmoveIntrastat ){
             for (int i = 0; i < sheeteArticle.getLastRowNum(); i++){
-                sheeteArticle.getRow(i).getCell(132).setBlank();
+                if(sheeteArticle.getRow(i) != null )
+                    if(sheeteArticle.getRow(i).getCell(132) != null )
+                         sheeteArticle.getRow(i).getCell(132).setBlank();
             }
         }
 
@@ -259,9 +287,7 @@ public class modification {
 
     }
 
-    public ArrayList<String> getError() {
-        return ErreurList;
-    }
+
 
 
 }
