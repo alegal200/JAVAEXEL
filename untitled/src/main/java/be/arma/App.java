@@ -53,6 +53,8 @@ public class App extends JFrame {
     private JCheckBox recyclageHTVMatricesCheckBox;
     private JCheckBox IntrastatMatricesCheckBox;
     private JCheckBox EANMatricesCheckBox;
+    private JCheckBox IntrastatMatriceCheckBox;
+    private JCheckBox EANMatriceCheckBox;
     private JLabel test;
     private JList list1;
 
@@ -130,7 +132,24 @@ public class App extends JFrame {
                     if(recyclageHTVMatriceCheckBox.isSelected()){
                     mod.setBRecyclageHTV(true);
                     }
+                    if(IntrastatMatriceCheckBox.isSelected()){
+                    mod.setBmoveIntrastat(true);
+                    }
+                    if(EANMatriceCheckBox.isSelected()){
+                    mod.setBcleanEAN(true);
+                    }
                     mod.modifmoicastp();
+                try {
+                    FileWriter GlobalError = new FileWriter(LienDeCopieEdit.getText() + "\\GlobalError.txt");
+
+                    ArrayList<String> globalerror = mod.getError();
+                    for (int w = 0; w < globalerror.size(); w++) {
+                        GlobalError.write("Erreur " + w + " : " + globalerror.get(w) + "\n");
+                    }
+                    GlobalError.close();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
             }
         });
         CreateMatricesButton.addActionListener(new ActionListener() {
