@@ -6,7 +6,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.swing.*;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -40,7 +39,8 @@ public class modification {
          BRecyclageHTV = false ;
          BmoveIntrastat = false ;
          BcleanEAN  = false ;
-         ErreurList = new ArrayList<String>();
+
+         ErreurList = new ArrayList<>();
 
     }
 
@@ -84,7 +84,7 @@ public class modification {
         Workbook workbook ;
 
         try {
-            filematvide = new FileInputStream(new File(LienMat));
+            filematvide = new FileInputStream(LienMat);
 
             workbook  = new XSSFWorkbook(filematvide);
 
@@ -174,38 +174,43 @@ public class modification {
                     if (sheeteArticle.getRow(i) != null){
                         Cell ced3e = sheeteArticle.getRow(i).getCell(56);
                     if (ced3e != null) {
-                        String tmp = ced3e.getStringCellValue();
-                         if (tmp.equals("") == false) {
+                        StringBuilder tmp = new StringBuilder(ced3e.getStringCellValue());
+                         if ( ! tmp.toString().equals("") ) {
                             try {
 
                                double d ;
-                                d = Double.parseDouble(tmp);
+                                d = Double.parseDouble(tmp.toString());
 
                                 if (tmp.length() != 13  && tmp.length() != 8 ){
                                     if( tmp.length() < 8 ){
-                                        if(tmp.length()==1)
+                                        if(tmp.length()==1){
                                             ErreurList.add("code bare erreur nbr    ; " + NomFourn + "    ; ln " + i + " ref ;  "+  sheeteArticle.getRow(i).getCell(0).getStringCellValue() + "   ;   code article  ; "+sheeteArticle.getRow(i).getCell(2).getStringCellValue() +"  ;   ean   ; "+ sheeteArticle.getRow(i).getCell(56).getStringCellValue());
-                                        else{
+                                            pastval(sheeteArticle , i ,56 , "");
+                                        }
+                                       else{
                                             while (tmp.length() != 8 ){
-                                                tmp = "0"+tmp;
+                                                tmp.insert(0, "0");
                                             }
                                         }
                                         if(tmp.length() == 8)
-                                        pastval(sheeteArticle , i ,56 ,tmp );
+                                        pastval(sheeteArticle , i ,56 , tmp.toString());
                                     }else{
                                         if(tmp.length() < 13 ){
                                             while (tmp.length()!= 13 )
-                                                tmp = "0"+tmp ;
+                                                tmp.insert(0, "0");
 
-                                            pastval(sheeteArticle , i ,56 ,tmp );
-                                        }else
+                                            pastval(sheeteArticle , i ,56 , tmp.toString());
+                                        }else{
                                             ErreurList.add("code bare erreur nbr    ; " + NomFourn + "    ; ln " + i + " ref ;  "+  sheeteArticle.getRow(i).getCell(0).getStringCellValue() + "   ;   code article  ; "+sheeteArticle.getRow(i).getCell(2).getStringCellValue() +"  ;   ean   ; "+ sheeteArticle.getRow(i).getCell(56).getStringCellValue());
+                                            pastval(sheeteArticle , i ,56 , "");
+                                        }
 
                                     }
 
                                 }
                            } catch (Exception e) {
                                 ErreurList.add("code bare erreur nbr    ; " + NomFourn + "    ; ln " + i + " ref ;  "+  sheeteArticle.getRow(i).getCell(0).getStringCellValue() + "   ;   code article  ; "+sheeteArticle.getRow(i).getCell(2).getStringCellValue() +"  ;   ean   ; "+ sheeteArticle.getRow(i).getCell(56).getStringCellValue());
+                                pastval(sheeteArticle , i ,56 , "");
                             }
 
                         }
