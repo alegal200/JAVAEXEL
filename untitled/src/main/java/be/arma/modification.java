@@ -112,7 +112,7 @@ public class modification {
 
 
 
-            FileOutputStream fos = new FileOutputStream(LienColler+"\\"+NomFourn+".xlsx") ;
+            FileOutputStream fos = new FileOutputStream(LienColler+"\\"+NomFourn) ;
 
             workbook.write(fos);
 
@@ -185,10 +185,12 @@ public class modification {
                                     if( tmp.length() < 8 ){
                                         if(tmp.length()==1)
                                             ErreurList.add("code bare erreur nbr    ; " + NomFourn + "    ; ln " + i + " ref ;  "+  sheeteArticle.getRow(i).getCell(0).getStringCellValue() + "   ;   code article  ; "+sheeteArticle.getRow(i).getCell(2).getStringCellValue() +"  ;   ean   ; "+ sheeteArticle.getRow(i).getCell(56).getStringCellValue());
-
-                                        while (tmp.length() != 8 )
-                                            tmp = "0"+tmp;
-
+                                        else{
+                                            while (tmp.length() != 8 ){
+                                                tmp = "0"+tmp;
+                                            }
+                                        }
+                                        if(tmp.length() == 8)
                                         pastval(sheeteArticle , i ,56 ,tmp );
                                     }else{
                                         if(tmp.length() < 13 ){
@@ -258,10 +260,11 @@ public class modification {
 
         // vider la derniere colone
         if(BmoveIntrastat ){
+
             for (int i = 0; i < sheeteArticle.getLastRowNum(); i++){
                 if(sheeteArticle.getRow(i) != null )
                     if(sheeteArticle.getRow(i).getCell(132) != null )
-                         sheeteArticle.getRow(i).getCell(132).setBlank();
+                         sheeteArticle.getRow(i).getCell(132).setCellValue("");
             }
         }
 
