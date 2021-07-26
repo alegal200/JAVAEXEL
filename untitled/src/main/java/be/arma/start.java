@@ -6,11 +6,11 @@ import java.awt.*;
 
 public class start {
 
-    public static JFrame frame = new JFrame("App");;
+    //public static JFrame frame = new JFrame("App");
 
     public static void main(String[] args) {
 
-
+        JFrame frame = new JFrame("App");
         frame.setContentPane(new App().panelMain);
         frame.setTitle("Arma - Matrice Manager");
         frame.setSize(700, 400);
@@ -24,7 +24,7 @@ public class start {
 
 
     }
-        
+
 
 
     }

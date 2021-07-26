@@ -165,7 +165,8 @@ public class modification {
 
                 if(BmoveIntrastat){
 
-                     if( sheeteArticle.getRow(i).getCell(132).getStringCellValue() !=null )
+
+                     if(  sheeteArticle.getRow(i) != null && sheeteArticle.getRow(i).getCell(132) !=null && sheeteArticle.getRow(i).getCell(132).getStringCellValue() !=null )
                          pastval(sheeteArticle ,i ,18 , sheeteArticle.getRow(i).getCell(132).getStringCellValue() );
 
                 }

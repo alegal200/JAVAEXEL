@@ -55,6 +55,7 @@ public class App extends JFrame {
     private JCheckBox EANMatricesCheckBox;
     private JCheckBox IntrastatMatriceCheckBox;
     private JCheckBox EANMatriceCheckBox;
+    private JButton btninfo;
     private JLabel test;
     private JList list1;
 
@@ -282,6 +283,18 @@ public class App extends JFrame {
 
             }
         });
+        btninfo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String strInformations = "modifications : " +System.lineSeparator() + " □ DATE : rerempli les colonnes  78 et 112 par 20210101" +System.lineSeparator() + " □ Fourn : supprime '----- " + System.lineSeparator() + " □ Intrastat : déplace la colonne 132 ->  18 + supprime les valeurs dans la dernière colonne " +
+                        System.lineSeparator() + " □ TVA code +'00   : transforme le code tva de 3,00 à 3  et met 00 dans la colonne 75 "+ System.lineSeparator() + " □ RecyclageHTV  : prend la valeur absolue des codes tva "+ System.lineSeparator() + " □ ean : supprime toutes les valeur non conforme ( 1 carctere et codes qui ne sont pas des nombres ) + rectifie les mauvais codes barre en rajoutant les 0 manquants ";
+                JOptionPane.showMessageDialog(null ,strInformations);
+            }
+        });
+
+
+
+
     }
 
 }
