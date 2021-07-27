@@ -156,7 +156,7 @@ public class creationExcel {
 
 
 
-        for (int i = 17; i < sheeteArticle.getLastRowNum(); i++) {
+        for (int i = 17; i <= sheeteArticle.getLastRowNum(); i++) {
             if(sheeteArticle.getRow(i).getCell(0)==null || sheeteArticle.getRow(i).getCell(0).getStringCellValue().equals("")  )
                 break;
             try{
@@ -394,52 +394,52 @@ public class creationExcel {
 
 
 
-                    if (sheeteArticle.getRow(i) != null){
-                        Cell ced3 = sheeteArticle.getRow(i).getCell(56);
-                        if (ced3 != null) {
-                            StringBuilder tmp = new StringBuilder(ced3e.getStringCellValue());
-                            if ( ! tmp.toString().equals("") ) {
-                                try {
+                if (sheeteArticle.getRow(i) != null){
+                    Cell ced3 = sheeteArticle.getRow(i).getCell(56);
+                    if (ced3 != null) {
+                        StringBuilder tmp = new StringBuilder(ced3.getStringCellValue());
+                        if ( ! tmp.toString().equals("") ) {
+                            try {
 
-                                    double d ;
-                                    d = Double.parseDouble(tmp.toString());
+                                double d ;
+                                d = Double.parseDouble(tmp.toString());
 
-                                    if (tmp.length() != 13  && tmp.length() != 8 ){
-                                        if( tmp.length() < 8 ){
-                                            if(tmp.length()==1){
-                                                ErrList.add("code bare erreur nbr    ; " + NomFourn + "    ; ln " + i + " ref ;  "+  sheeteArticle.getRow(i).getCell(0).getStringCellValue() + "   ;   code article  ; "+sheeteArticle.getRow(i).getCell(2).getStringCellValue() +"  ;   ean   ; "+ sheeteArticle.getRow(i).getCell(56).getStringCellValue());
-                                                pastval(sheeteArticle , i ,56 , "");
+                                if (tmp.length() != 13  && tmp.length() != 8 ){
+                                    if( tmp.length() < 8 ){
+                                        if(tmp.length()==1){
+                                            ErrList.add("code bare erreur nbr    ; " + NomFourn + "    ; ln " + i + " ref ;  "+  sheeteArticle.getRow(i).getCell(0).getStringCellValue() + "   ;   code article  ; "+sheeteArticle.getRow(i).getCell(2).getStringCellValue() +"  ;   ean   ; "+ sheeteArticle.getRow(i).getCell(56).getStringCellValue());
+                                            pastval(sheeteArticle , i ,56 , "");
+                                        }
+                                        else{
+                                            while (tmp.length() != 8 ){
+                                                tmp.insert(0, "0");
                                             }
-                                            else{
-                                                while (tmp.length() != 8 ){
-                                                    tmp.insert(0, "0");
-                                                }
-                                            }
-                                            if(tmp.length() == 8)
-                                                pastval(sheeteArticle , i ,56 , tmp.toString());
+                                        }
+                                        if(tmp.length() == 8)
+                                            pastval(sheeteArticle , i ,56 , tmp.toString());
+                                    }else{
+                                        if(tmp.length() < 13 ){
+                                            while (tmp.length()!= 13 )
+                                                tmp.insert(0, "0");
+
+                                            pastval(sheeteArticle , i ,56 , tmp.toString());
                                         }else{
-                                            if(tmp.length() < 13 ){
-                                                while (tmp.length()!= 13 )
-                                                    tmp.insert(0, "0");
-
-                                                pastval(sheeteArticle , i ,56 , tmp.toString());
-                                            }else{
-                                                ErrList.add("code bare erreur nbr    ; " + NomFourn + "    ; ln " + i + " ref ;  "+  sheeteArticle.getRow(i).getCell(0).getStringCellValue() + "   ;   code article  ; "+sheeteArticle.getRow(i).getCell(2).getStringCellValue() +"  ;   ean   ; "+ sheeteArticle.getRow(i).getCell(56).getStringCellValue());
-                                                pastval(sheeteArticle , i ,56 , "");
-                                            }
-
+                                            ErrList.add("code bare erreur nbr    ; " + NomFourn + "    ; ln " + i + " ref ;  "+  sheeteArticle.getRow(i).getCell(0).getStringCellValue() + "   ;   code article  ; "+sheeteArticle.getRow(i).getCell(2).getStringCellValue() +"  ;   ean   ; "+ sheeteArticle.getRow(i).getCell(56).getStringCellValue());
+                                            pastval(sheeteArticle , i ,56 , "");
                                         }
 
                                     }
-                                } catch (Exception e) {
-                                    ErrList.add("code bare erreur nbr    ; " + NomFourn + "    ; ln " + i + " ref ;  "+  sheeteArticle.getRow(i).getCell(0).getStringCellValue() + "   ;   code article  ; "+sheeteArticle.getRow(i).getCell(2).getStringCellValue() +"  ;   ean   ; "+ sheeteArticle.getRow(i).getCell(56).getStringCellValue());
-                                    pastval(sheeteArticle , i ,56 , "");
-                                }
 
+                                }
+                            } catch (Exception e) {
+                                ErrList.add("code bare erreur nbr    ; " + NomFourn + "    ; ln " + i + " ref ;  "+  sheeteArticle.getRow(i).getCell(0).getStringCellValue() + "   ;   code article  ; "+sheeteArticle.getRow(i).getCell(2).getStringCellValue() +"  ;   ean   ; "+ sheeteArticle.getRow(i).getCell(56).getStringCellValue());
+                                pastval(sheeteArticle , i ,56 , "");
                             }
 
                         }
+
                     }
+                }
 
 
 
@@ -521,15 +521,21 @@ public class creationExcel {
                     Cell c = null;
                     try {
                         c = sheetecriture.getRow(debutrow+i).getCell(j) ;
+                        if(sheetecriture.getRow(debutrow+i) == null)
+                            sheetecriture.createRow(debutrow+i);
+                        if(sheetecriture.getRow(debutrow+i).getCell(j) == null )
+                            c = sheetecriture.getRow(debutrow+i).createCell(j);
                     }catch (Exception e){
                         if(sheetecriture.getRow(debutrow+i) == null)
                             sheetecriture.createRow(debutrow+i);
                         if(sheetecriture.getRow(debutrow+i).getCell(j) == null )
                             c = sheetecriture.getRow(debutrow+i).createCell(j);
 
+
                     }
-                    if(c != null)
+                  //  if(c != null)
                         c.setCellValue( sheet1.getRow(i).getCell(j).toString()     );
+
 
                 }
 
@@ -557,6 +563,10 @@ public class creationExcel {
                     Cell c = null;
                     try {
                         c = sheetecriture.getRow(debutrow+i).getCell(j+ajoutp2) ;
+                        if(sheetecriture.getRow(debutrow+i) == null)
+                            sheetecriture.createRow(debutrow+i);
+                        if(sheetecriture.getRow(debutrow+i).getCell(j+ajoutp2) == null )
+                            c = sheetecriture.getRow(debutrow+i).createCell(j+ajoutp2);
                     }catch (Exception e){
                         if(sheetecriture.getRow(debutrow+i) == null)
                             sheetecriture.createRow(debutrow+i);
@@ -564,7 +574,7 @@ public class creationExcel {
                             c = sheetecriture.getRow(debutrow+i).createCell(j+ajoutp2);
 
                     }
-                    if(c != null)
+
                         c.setCellValue( sheet2.getRow(i).getCell(j).toString()  );  //
 
                 }
@@ -593,6 +603,10 @@ public class creationExcel {
                     Cell c = null;
                     try {
                         c = sheetecriture.getRow(debutrow+i).getCell(j+ajoutp3) ;
+                        if(sheetecriture.getRow(debutrow+i) == null)
+                            sheetecriture.createRow(debutrow+i);
+                        if(sheetecriture.getRow(debutrow+i).getCell(j+ajoutp3) == null )
+                            c = sheetecriture.getRow(debutrow+i).createCell(j+ajoutp3);
                     }catch (Exception e){
                         if(sheetecriture.getRow(debutrow+i) == null)
                             sheetecriture.createRow(debutrow+i);
@@ -600,7 +614,7 @@ public class creationExcel {
                             c = sheetecriture.getRow(debutrow+i).createCell(j+ajoutp3);
 
                     }
-                    if(c != null)
+
                         c.setCellValue( sheet3.getRow(i).getCell(j).toString()  );  //
 
                 }
