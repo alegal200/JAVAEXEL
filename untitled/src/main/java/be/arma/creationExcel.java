@@ -343,6 +343,9 @@ public class creationExcel {
 
 
                 pastval(sheeteStock, i-12 , 1 , sheeteArticle.getRow(i).getCell(2).getStringCellValue() );
+                if(promaco)
+                    pastval(sheeteStock, i-12 , 3 , "20");
+                else
                 pastval(sheeteStock, i-12 , 3 , "10");
                 pastval(sheeteStock, i-12 , 4 , "O");
 
