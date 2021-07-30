@@ -328,11 +328,12 @@ public class creationExcel {
 
 
                 // colone w type de taxe
+                if( ! promaco){
+                    Cell ced3e = sheeteArticle.getRow(i).getCell(23) ;
+                    if(    ced3e != null && ! ced3e.getStringCellValue().equals("0.0")     )
+                        pastval(sheeteArticle,i ,22 ,"ED3E");
+                }
 
-
-                Cell ced3e = sheeteArticle.getRow(i).getCell(23) ;
-                if(    ced3e != null && ! ced3e.getStringCellValue().equals("0.0")     )
-                    pastval(sheeteArticle,i ,22 ,"ED3E");
 
                 // feuille stock
                 Cell cedEe = sheeteArticle.getRow(i).getCell(129) ;
